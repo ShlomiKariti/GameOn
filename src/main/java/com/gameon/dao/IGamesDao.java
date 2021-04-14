@@ -12,11 +12,11 @@ import com.gameon.enums.Genre;
 
 public interface IGamesDao extends CrudRepository<Game, Long> {
 
-	@Query("SELECT g FROM Game g WHERE g.genre = :genre")
-	public List<Game> findByGenre(@Param("genre")Genre genre);
-
-	@Query("SELECT g from Game g")
-	public List<Game> getAllGames();
+//	@Query("SELECT g FROM Game g WHERE g.genre = :genre")
+//	public List<Game> findByGenre(@Param("genre")Genre genre);
+//
+//	@Query("SELECT g from Game g")
+//	public List<Game> getAllGames();
 
 
 }

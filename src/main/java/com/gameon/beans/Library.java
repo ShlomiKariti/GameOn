@@ -23,7 +23,7 @@ public class Library {
 	private long id;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "library", cascade = CascadeType.REMOVE)
 	private List<Game>games;
 	
 

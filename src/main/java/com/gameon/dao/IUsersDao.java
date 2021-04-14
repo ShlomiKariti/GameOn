@@ -10,7 +10,7 @@ import com.gameon.beans.User;
 
 public interface IUsersDao extends CrudRepository<User, Long> {
 
-	public User findByUsername(@Param("username") String username);
+	public User findByEmail(@Param("email") String email);
 
 	@Query("SELECT u FROM User u")
 	public List<User> getAllUsers();

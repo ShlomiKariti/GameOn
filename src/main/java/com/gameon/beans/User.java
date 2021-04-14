@@ -1,6 +1,7 @@
 package com.gameon.beans;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,13 +11,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gameon.enums.UserType;
 
 
@@ -49,6 +49,10 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	@Column(unique = false, nullable = false)
 	private UserType type;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+	private List<Purchase> purchases;
 
 
 	public long getId() {

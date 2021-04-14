@@ -6,9 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "games")
@@ -32,8 +36,17 @@ public class Game {
 	@Column(unique = false, nullable = false)
 	private float price;
 	
-	//ADD IMAGES VARIABLE HERE - TBD
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "library_id")
+	private Library library;
 	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "wishlist_id")
+	private Wishlist wishlist;
+	
+	//ADD IMAGES VARIABLE HERE - TBD
 
 	public long getId() {
 		return id;
@@ -74,8 +87,22 @@ public class Game {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	
-	
+
+	public Library getLibrary() {
+		return library;
+	}
+
+	public void setLibrary(Library library) {
+		this.library = library;
+	}
+
+	public Wishlist getWishlist() {
+		return wishlist;
+	}
+
+	public void setWishlist(Wishlist wishlist) {
+		this.wishlist = wishlist;
+	}
 	
 	
 

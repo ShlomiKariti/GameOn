@@ -49,17 +49,17 @@ public class GamesApi {
 		this.gamesController.removeGame(id);
 	}
 
-	@GetMapping
-	public List<Game> getAllGames() throws ApplicationException {
-		return this.gamesController.getAllGames();
-	}
-
-	@GetMapping("/byGenre/{genre}")
-	public List<Game> findByGenre(@PathVariable("genre")String genre) throws ApplicationException {
-		Genre genreName = Genre.valueOf(genre.toUpperCase());
-		return this.gamesController.findByGenre(genreName);
-
-	}
+//	@GetMapping
+//	public List<Game> getAllGames() throws ApplicationException {
+//		return this.gamesController.getAllGames();
+//	}
+//
+//	@GetMapping("/byGenre/{genre}")
+//	public List<Game> findByGenre(@PathVariable("genre")String genre) throws ApplicationException {
+//		Genre genreName = Genre.valueOf(genre.toUpperCase());
+//		return this.gamesController.findByGenre(genreName);
+//
+//	}
 
 
 }

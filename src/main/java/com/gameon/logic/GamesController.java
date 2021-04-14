@@ -95,25 +95,25 @@ public class GamesController {
 		}
 	}
 
-	public List<Game> getAllGames() throws ApplicationException {
-
-		try {
-			return this.gamesDao.getAllGames();
-		}
-		catch (Exception e) {
-			throw new ApplicationException(ErrorType.INVALID_GAME,"Failed to remove games.");
-		}
-	}
-
-	public List<Game> findByGenre(Genre genre) throws ApplicationException {
-
-		try {
-			return this.gamesDao.findByGenre(genre);
-		}
-		catch (Exception e) {
-			throw new ApplicationException(ErrorType.INVALID_GAME,"Failed to find games.");
-		}
-	}
+//	public List<Game> getAllGames() throws ApplicationException {
+//
+//		try {
+//			return this.gamesDao.getAllGames();
+//		}
+//		catch (Exception e) {
+//			throw new ApplicationException(ErrorType.INVALID_GAME,"Failed to remove games.");
+//		}
+//	}
+//
+//	public List<Game> findByGenre(Genre genre) throws ApplicationException {
+//
+//		try {
+//			return this.gamesDao.findByGenre(genre);
+//		}
+//		catch (Exception e) {
+//			throw new ApplicationException(ErrorType.INVALID_GAME,"Failed to find games.");
+//		}
+//	}
 
 
 }

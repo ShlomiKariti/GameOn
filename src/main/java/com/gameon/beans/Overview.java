@@ -1,73 +1,100 @@
 package com.gameon.beans;
 
-import java.util.List;
 
-import com.gameon.enums.Genre;
-import com.gameon.enums.Platform;
+import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "overviews")
 public class Overview {
 	
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
 	private long id;
 	
-	private String releaseDate;
+	@Column(unique = false, nullable = false)
+	private Date releaseDate;
 	
-	private List<Genre>genres;
+	@Column(unique = false, nullable = false)
+	private String genre;
 	
+	@Column(unique = false, nullable = false)
 	private String rating;
 	
+	@Column(unique = false, nullable = false)
 	private String publisher;
 	
-	private List<Platform>platforms;
-	
+	@Column(unique = false, nullable = false)
+	private String platform;
+
 
 	public long getId() {
 		return id;
 	}
 
+
 	public void setId(long id) {
 		this.id = id;
 	}
 
-	public String getReleaseDate() {
+
+	public Date getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(String releaseDate) {
+
+	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
-	public List<Genre> getGenres() {
-		return genres;
+
+	public String getGenre() {
+		return genre;
 	}
 
-	public void setGenres(List<Genre> genres) {
-		this.genres = genres;
+
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
+
 
 	public String getRating() {
 		return rating;
 	}
 
+
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
+
 
 	public String getPublisher() {
 		return publisher;
 	}
 
+
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
 
-	public List<Platform> getPlatforms() {
-		return platforms;
+
+	public String getPlatform() {
+		return platform;
 	}
 
-	public void setPlatforms(List<Platform> platforms) {
-		this.platforms = platforms;
+
+	public void setPlatform(String platform) {
+		this.platform = platform;
 	}
 	
+
 	
 	
 

@@ -4,9 +4,12 @@ public enum ErrorType {
 	
 	GENERAL_ERROR(551, "General error.", true),
 	INVALID_PASSWORD(553, "Invalid Password.", false),
+	INVALID_WISHLIST(554, "Wishlist doesn't exist.", false),
 	INVALID_GAME(557, "Game doesn't exist.", false),
 	INVALID_EMAIL(558, "Invalid Email.", false),
 	INVALID_PRICE(559, "Price must be above 0.", false),
+	INVALID_OVERVIEW(560, "Overview doesn't exist.", false),
+	INVALID_LIBRARY(561, "Library doesn't exist.", false),
 	INVALID_GENRE(562, "Must choose a category.", false),
 	INVALID_GAME_TITLE(563, "Must type a game name.", false),
 	INVALID_PURCHASE(564, "Purchase doesn't exist.", false),

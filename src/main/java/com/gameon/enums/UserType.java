@@ -2,7 +2,7 @@ package com.gameon.enums;
 
 public enum UserType {
 	ADMIN("Admin"),
-	CUSTOMER("Customer");
+	USER("User");
 	
 	
 	private String name;

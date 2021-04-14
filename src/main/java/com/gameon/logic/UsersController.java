@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.gameon.beans.Library;
 import com.gameon.beans.PostLoginData;
 import com.gameon.beans.SuccessfulLoginData;
 import com.gameon.beans.User;
 import com.gameon.beans.UserLoginDetails;
+import com.gameon.beans.Wishlist;
 import com.gameon.dao.IUsersDao;
 import com.gameon.enums.ErrorType;
 import com.gameon.exceptions.ApplicationException;
@@ -25,6 +27,11 @@ public class UsersController {
 	@Autowired
 	private CacheController cacheController;
 
+	@Autowired
+	private LibraryController libraryController;
+	
+	@Autowired
+	private WishlistController wishlistController;
 
 	public UsersController() {
 
@@ -47,12 +54,29 @@ public class UsersController {
 		if (user.getPassword().length() > 10) {
 			throw new ApplicationException(ErrorType.INVALID_PASSWORD,"Password is too long");
 		}
-
-
+		
+		
+		try {
+			Library library = libraryController.createLibrary();
+			user.setLibrary(library);
+		}
+		catch(Exception e) {
+			throw new ApplicationException(ErrorType.INVALID_LIBRARY,"Failed to create a library.");
+		}
+		
+		try {
+			Wishlist wishlist = wishlistController.createWishlist();
+			user.setWishlist(wishlist);
+		}
+		catch(Exception e) {
+			throw new ApplicationException(ErrorType.INVALID_WISHLIST,"Failed to create a wishlist.");
+		}
+		
+		
 		byte[] hashedPassword = Utils.hashPassword(user.getPassword());
 		Base64.Encoder enc = Base64.getEncoder();
 		user.setPassword(enc.encodeToString(hashedPassword));
-
+	
 		try {
 			this.usersDao.save(user);
 			return user.getId();
@@ -103,7 +127,7 @@ public class UsersController {
 		}
 
 		if (user.getEmail().length() < 2) {
-			throw new ApplicationException(ErrorType.INVALID_USER,"Username is too short");
+			throw new ApplicationException(ErrorType.INVALID_USER,"Email is too short");
 		}
 
 		try {
@@ -116,12 +140,12 @@ public class UsersController {
 
 	public SuccessfulLoginData login(UserLoginDetails userLoginDetails) throws ApplicationException {
 		
-		User user = this.usersDao.findByUsername(userLoginDetails.getEmail());
+		User user = this.usersDao.findByEmail(userLoginDetails.getEmail());
 		if (user == null) {
-			throw new ApplicationException(ErrorType.FAILED_LOGIN, "Invalid username or password");
+			throw new ApplicationException(ErrorType.FAILED_LOGIN, "Invalid email or password");
 		}
 		if(!this.comparePassword(user.getPassword(), userLoginDetails.getPassword())) {
-			throw new ApplicationException(ErrorType.FAILED_LOGIN, "Invalid username or password");
+			throw new ApplicationException(ErrorType.FAILED_LOGIN, "Invalid email or password");
 		}
 		PostLoginData postLoginData;
 		
@@ -143,9 +167,9 @@ public class UsersController {
 	}
 
 
-	public void changePassword(String username, String oldPassword, String newPassword) throws ApplicationException {
+	public void changePassword(String email, String oldPassword, String newPassword) throws ApplicationException {
 
-		User user = usersDao.findByUsername(username);
+		User user = usersDao.findByEmail(email);
 
 		if(user == null) {
 			throw new ApplicationException(ErrorType.INVALID_USER, "User has not been found");

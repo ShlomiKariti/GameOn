@@ -22,7 +22,7 @@ public class Wishlist {
 	private long id;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "wishlist", cascade = CascadeType.REMOVE)
 	private List<Game>games;
 	
 
