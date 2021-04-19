@@ -28,7 +28,7 @@ public class OverviewApi {
 
 	@PostMapping
 	public void createOverview(@RequestBody Overview overview, @RequestAttribute("userData") PostLoginData postLoginData) throws ApplicationException {
-		this.overviewsController.createOverview(overview);
+		this.overviewsController.createOverview();
 
 	}
 	@PutMapping

@@ -21,14 +21,13 @@ public class OverviewController {
 	}
 
 	
-	public void createOverview(Overview overview) throws ApplicationException {
+	public Overview createOverview() throws ApplicationException {
 
-		if (overview == null) {
-			throw new ApplicationException(ErrorType.INVALID_OVERVIEW, "A null overview");
-		}
+		Overview overview = new Overview();
 
 		try {
 			this.overviewsDao.save(overview);
+			return overview;
 		}
 		catch (Exception e) {
 			throw new ApplicationException(ErrorType.GENERAL_ERROR,"Failed to create overview." );

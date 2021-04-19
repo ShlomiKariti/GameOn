@@ -1,18 +1,19 @@
 package com.gameon.beans;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "games")
@@ -36,15 +37,14 @@ public class Game {
 	@Column(unique = false, nullable = false)
 	private float price;
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "library_id")
-	private Library library;
+	@OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
+	@JsonIgnore
+	private List<Wishlist>wishlist;
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "wishlist_id")
-	private Wishlist wishlist;
+	@OneToMany(mappedBy = "game", cascade = CascadeType.REMOVE)
+	@JsonIgnore
+	private List<Library>library;
+	
 	
 	//ADD IMAGES VARIABLE HERE - TBD
 
@@ -88,22 +88,21 @@ public class Game {
 		this.price = price;
 	}
 
-	public Library getLibrary() {
-		return library;
-	}
-
-	public void setLibrary(Library library) {
-		this.library = library;
-	}
-
-	public Wishlist getWishlist() {
+	public List<Wishlist> getWishlist() {
 		return wishlist;
 	}
 
-	public void setWishlist(Wishlist wishlist) {
+	public void setWishlist(List<Wishlist> wishlist) {
 		this.wishlist = wishlist;
 	}
-	
-	
+
+	public List<Library> getLibrary() {
+		return library;
+	}
+
+	public void setLibrary(List<Library> library) {
+		this.library = library;
+	}
+
 
 }

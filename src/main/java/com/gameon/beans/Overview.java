@@ -19,19 +19,19 @@ public class Overview {
 	@Column(name = "id")
 	private long id;
 	
-	@Column(unique = false, nullable = false)
+	@Column(unique = false, nullable = true)
 	private Date releaseDate;
 	
-	@Column(unique = false, nullable = false)
+	@Column(unique = false, nullable = true)
 	private String genre;
 	
-	@Column(unique = false, nullable = false)
+	@Column(unique = false, nullable = true)
 	private String rating;
 	
-	@Column(unique = false, nullable = false)
+	@Column(unique = false, nullable = true)
 	private String publisher;
 	
-	@Column(unique = false, nullable = false)
+	@Column(unique = false, nullable = true)
 	private String platform;
 
 

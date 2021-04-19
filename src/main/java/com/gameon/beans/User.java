@@ -35,15 +35,15 @@ public class User {
 	@Column(unique = false, nullable = false)
 	private String password;
 
-	@Column(unique = false, nullable = false)
-	private Date birthday;
+//	@Column(unique = false, nullable = false)
+//	private Date birthday;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@MapsId
+	@JsonIgnore
 	private Library library;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@MapsId
+	@JsonIgnore
 	private Wishlist wishlist;
 
 	@Enumerated(EnumType.STRING)
@@ -79,14 +79,6 @@ public class User {
 		this.password = password;
 	}
 
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
 	public Library getLibrary() {
 		return library;
 	}
@@ -110,20 +102,6 @@ public class User {
 	public void setType(UserType type) {
 		this.type = type;
 	}
-
-	//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	//	@ManyToOne(fetch = FetchType.LAZY)
-	//	@JoinColumn(name = "company_id")
-	//	private Company company;
-
-
-	//
-	//	public void setCompany(Company company) {
-	//		this.company = company;
-	//	}
-
-
-
 
 }
 

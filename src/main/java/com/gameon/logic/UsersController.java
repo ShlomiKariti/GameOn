@@ -14,6 +14,7 @@ import com.gameon.beans.UserLoginDetails;
 import com.gameon.beans.Wishlist;
 import com.gameon.dao.IUsersDao;
 import com.gameon.enums.ErrorType;
+import com.gameon.enums.UserType;
 import com.gameon.exceptions.ApplicationException;
 import com.gameon.utils.Utils;
 
@@ -55,8 +56,11 @@ public class UsersController {
 			throw new ApplicationException(ErrorType.INVALID_PASSWORD,"Password is too long");
 		}
 		
+		//CREATE ADMIN USER
+		user.setType(UserType.ADMIN);
 		
 		try {
+			
 			Library library = libraryController.createLibrary();
 			user.setLibrary(library);
 		}

@@ -2,15 +2,19 @@ package com.gameon.logic;
 
 
 
-import java.util.List;
+
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.gameon.beans.Game;
+import com.gameon.beans.Overview;
 import com.gameon.dao.IGamesDao;
 import com.gameon.enums.ErrorType;
-import com.gameon.enums.Genre;
 import com.gameon.exceptions.ApplicationException;
 
 
@@ -20,6 +24,8 @@ public class GamesController {
 	@Autowired
 	private IGamesDao gamesDao;
 
+	@Autowired
+	private OverviewController overviewController;
 
 	public GamesController() {
 
@@ -36,9 +42,22 @@ public class GamesController {
 			throw new ApplicationException(ErrorType.INVALID_GAME_TITLE,"No title");
 		}
 
-		if(game.getPrice()==0) {
-			throw new ApplicationException(ErrorType.INVALID_PRICE,"No price input.");
+//		if(game.getPrice()==0) {
+//			throw new ApplicationException(ErrorType.INVALID_PRICE,"No price input.");
+//		}
+//		
+
+		
+try {
+			
+			Overview overview = overviewController.createOverview();
+			System.out.println(overview + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+			game.setOverview(overview);
 		}
+		catch(Exception e) {
+			throw new ApplicationException(ErrorType.INVALID_OVERVIEW,"Failed to create a overview.");
+		}
+		
 		
 		try {
 			this.gamesDao.save(game);
